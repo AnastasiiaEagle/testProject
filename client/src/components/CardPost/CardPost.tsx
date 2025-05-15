@@ -1,3 +1,4 @@
+'use client'
 
 
 type CardPostsProps = {
@@ -8,31 +9,24 @@ type CardPostsProps = {
     importance: string
 }
 
-export default function CardPosts({id, name, date, time, importance}:CardPostsProps) {
+export default function CardPosts({id, name, date, time, importance}:CardPostsProps) {        
 
-    const handleViewClick = () => {
-    // Наприклад, перенаправлення на /posts/123
-    window.location.href = `/posts/${id}`;
-    };
-    
-
-    // const name = "Мій перший пост";
-    // const date = "2025-05-16";
-    // const time = "14:30";
-    // const importance = "HIGH";
+    const handleViewClick = () =>{
+        window.location.href = `/view/${id}`;
+    }
 
     const getImportanceColor = (level: string) => {
         switch (level) {
         case "CRITICAL":
-            return "text-red-600";
+            return "text-red-600"
         case "NORMAL":
-            return "text-yellow-600";
+            return "text-yellow-600"
         case "IMPORTANT":
-            return "text-green-600";
+            return "text-green-600"
         default:
-            return "text-gray-600";
+            return "text-gray-600"
         }
-    };
+    }
 
     return(
         <div className="flex items-center justify-between p-4 bg-white rounded-2xl shadow-md mb-4 w-full max-w-3xl transition-all duration-200 hover:shadow-lg hover:bg-gray-100 ">

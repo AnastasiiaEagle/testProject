@@ -8,10 +8,10 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 import { CardInt } from "@/types/CardInt";
 
-
 export default function ListPosts() {
     const [posts, setPosts] = useState<CardInt[]>([]);
     const [loading, setLoading] = useState(true);
+    const [popupState, setPopupState] = useState(false)
     const router = useRouter();
 
     function isAccessTokenValid(token: string): boolean {
@@ -77,7 +77,7 @@ export default function ListPosts() {
     }, []);
 
     return(
-        <>
+        <div className="relative p-8 bg-gray-100 min-h-screen">
             <div className="w-full flex flex-col items-center px-4 pt-5">
                 <div className="w-full max-w-3xl">
                     {Array.isArray(posts) ? posts.map((post) => (
@@ -88,10 +88,11 @@ export default function ListPosts() {
                             date={post.date}
                             time={post.time}
                             importance={post.importance}
+                            
                             />
                     )): "Список порожній =("}
                 </div>
             </div>
-        </>
+        </div>
     )
 }
