@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 
 type ViewInfoCardProps = {
   name: string;
@@ -18,6 +19,9 @@ export default function ViewInfoCard({
     onEdit,
     onDelete,
     }: ViewInfoCardProps) {
+
+    const router = useRouter()
+        
 
     const getImportanceColor = () => {
         switch (importance) {
@@ -71,6 +75,12 @@ export default function ViewInfoCard({
                     </p>
 
                     <div className="mt-4 flex justify-center gap-4">
+                        <button
+                        onClick={()=> router.push('/')}
+                        className="px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 transition"
+                        >
+                        Повернутись
+                        </button>
                         <button
                         onClick={onEdit}
                         className="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"

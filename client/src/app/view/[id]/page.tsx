@@ -63,7 +63,7 @@ export default function View() {
                 time={card.time}
                 importance={card.importance}
                 onDelete={() => handleDelete()}
-                onEdit={() => console.log("Редагувати")}
+                onEdit={() => router.push(`/update/${id}`)}
             />
         }
         </>

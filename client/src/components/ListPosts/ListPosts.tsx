@@ -7,6 +7,7 @@ import axios from '../../utils/axios'
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 import { CardInt } from "@/types/CardInt";
+import Filter from "../Filter/Filter";
 
 export default function ListPosts() {
     const [posts, setPosts] = useState<CardInt[]>([]);
@@ -71,28 +72,56 @@ export default function ListPosts() {
         }
     }
 
+    const filterTasks = async (importance: string) =>{
+        if(importance!==""){
+            try {
+            const res = await axios.get('/posts/user', 
+                {
+                    withCredentials: true
+                });
+            
+            setLoading(false)
+            setPosts(res.data)
+
+            if (res.status === 200) {
+            setPosts((post) => post.filter((msg) => msg.importance === importance));
+            } else {
+            console.error('Не вдалося отримати повідомлення');
+            }
+        setLoading(false);
+        } catch (error) {
+            console.log(error)
+        }
+        } else {
+        getPosts()
+        }
+    }
+
     useEffect(() => {
         tokenSearch();
         getPosts();
     }, []);
 
     return(
-        <div className="relative p-8 bg-gray-100 min-h-screen">
-            <div className="w-full flex flex-col items-center px-4 pt-5">
-                <div className="w-full max-w-3xl">
-                    {Array.isArray(posts) ? posts.map((post) => (
-                        <CardPosts
-                            key={post.id}
-                            id={post.id}
-                            name={post.name}
-                            date={post.date}
-                            time={post.time}
-                            importance={post.importance}
-                            
-                            />
-                    )): "Список порожній =("}
+        <>
+            <Filter onFilter={filterTasks}/>
+            <div className="relative p-8 bg-gray-100 min-h-screen">
+                <div className="w-full flex flex-col items-center px-4 pt-5">
+                    <div className="w-full max-w-3xl">
+                        {Array.isArray(posts) ? posts.map((post) => (
+                            <CardPosts
+                                key={post.id}
+                                id={post.id}
+                                name={post.name}
+                                date={post.date}
+                                time={post.time}
+                                importance={post.importance}
+                                
+                                />
+                        )): "Список порожній =("}
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }

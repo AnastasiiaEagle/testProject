@@ -10,7 +10,11 @@ export default function Home() {
   return (
    <>
     <Header onViewState={setViewState}/>
-    {viewState ? "перше" : <ListPosts />}
+    {viewState ? "перше" :
+      <>
+        <ListPosts />
+      </>
+     }
    </>
   );
 }
