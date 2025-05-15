@@ -1,8 +1,6 @@
 'use client'
 
-import { jwtDecode } from "jwt-decode";
 import CardPosts from "../CardPost/CardPost";
-import Cookies from 'js-cookie';
 import axios from '../../utils/axios'
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
@@ -15,42 +13,7 @@ export default function ListPosts() {
     const [allPosts, setAllPosts] = useState<CardInt[]>([]);
 
     const [loading, setLoading] = useState(true);
-    const router = useRouter();
 
-    function isAccessTokenValid(token: string): boolean {
-        try {
-            const decoded: { exp: number } = jwtDecode(token);
-            const currentTime = Date.now() / 1000;
-            return decoded.exp > currentTime;
-        } catch (error) {
-            return false;
-        }
-    }
-
-    const tokenSearch = async()=>{
-        const token = Cookies.get('refreshToken');
-        const localToken = localStorage.getItem('accessToken');
-        
-        if(!token && !localToken){
-            console.log('Токен не знайдений');
-            router.push('/auth');
-        }else if(localToken !== null){
-        if(!isAccessTokenValid(localToken)){
-            try {
-                const res = await axios.get('/auth/refresh',
-                {
-                    withCredentials: true
-                }
-                );
-                if (res.data.accessToken) {
-                    localStorage.setItem('accessToken', res.data.accessToken);
-                }
-            } catch (error: any) {
-                console.log(error)
-            }
-        }
-        }
-    }
 
     const getPosts = async () => {
         setLoading(true)
@@ -78,8 +41,8 @@ export default function ListPosts() {
     const filterTasks = async (importance: string) =>{
         console.log(importance)
         if(importance!==""){
-        const filtered = allPosts.filter((msg) => msg.importance === importance);
-        setPosts(filtered);
+        const filtered = allPosts.filter((msg) => msg.importance === importance)
+        setPosts(filtered)
         } else {
             setPosts(allPosts)
         }
@@ -92,15 +55,14 @@ export default function ListPosts() {
                 msg.name.toLowerCase().includes(text.toLowerCase()) ||
                 msg.description.toLowerCase().includes(text.toLowerCase())
             )
-            setPosts(filtered);
+            setPosts(filtered)
         } else {
             setPosts(allPosts)
         }
     }
 
     useEffect(() => {
-        tokenSearch();
-        getPosts();
+        getPosts()
     }, []);
 
     return(
