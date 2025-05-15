@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Req, Res } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { PostDto } from './dto/posts.dto';
 import { IdDto } from './dto/id.dto';
+import { Request, Response } from 'express';
 
 @Controller('posts')
 export class PostsController {
@@ -18,8 +19,8 @@ export class PostsController {
   }
 
   @Get('user')
-  findUserPosts(@Body() dto: IdDto) {
-    return this.postsService.findUserPosts(dto);
+  findUserPosts(@Req() req: Request) {
+    return this.postsService.findUserPosts(req);
   }
 
   @Get(':id')

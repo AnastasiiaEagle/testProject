@@ -1,13 +1,26 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PostDto } from './dto/posts.dto';
 import { Posts } from 'generated/prisma';
 import { IdDto } from './dto/id.dto';
+import type { Request, Response } from 'express';
+import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
+import { JwtPayload } from 'src/auth/interfaces/jwt.interface';
 
 @Injectable()
 export class PostsService {
+    private readonly JWT_ACCESS_TOKEN_TTL: string
+    private readonly JWT_REFRESH_TOKEN_TTL: string
+    private readonly COOKIE_DOMAIN: string
 
-    constructor (private readonly prismaService: PrismaService){}
+    constructor (private readonly prismaService: PrismaService,
+      private readonly configService: ConfigService,
+      private readonly jwtService: JwtService,){
+                  this.JWT_ACCESS_TOKEN_TTL = configService.getOrThrow<string>('JWT_ACCESS_TOKEN_TTL')
+                  this.JWT_REFRESH_TOKEN_TTL = configService.getOrThrow<string>('JWT_REFRESH_TOKEN_TTL')
+                  this.COOKIE_DOMAIN = configService.getOrThrow<string>('COOKIE_DOMAIN')
+              } 
 
     async create(dto: PostDto): Promise<Posts> {
         const {name, description, date, time, importance, userId} = dto
@@ -63,10 +76,20 @@ export class PostsService {
     return post
   }
 
-  async findUserPosts(dto: IdDto) {
+  async findUserPosts(req: Request) {
+
+  const refreshToken = req.cookies['refreshToken'];
+
+  if (!refreshToken || refreshToken === 'refreshToken') {
+    throw new UnauthorizedException('Недійсний refresh-токен');
+  }
+  const payload: JwtPayload = await this.jwtService.verifyAsync(refreshToken);
+  const userId = payload.id;
+
+
     const isUser = await this.prismaService.users.findUnique({
         where: {
-            id: dto.userId
+            id: userId
         }
     })
 
@@ -76,7 +99,7 @@ export class PostsService {
 
     const posts = await this.prismaService.posts.findMany({
         where: {
-            userId: dto.userId
+            userId: userId
         }
     })
 
