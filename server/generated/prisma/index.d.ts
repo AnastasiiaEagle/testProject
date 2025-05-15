@@ -2091,9 +2091,9 @@ export namespace Prisma {
   export type PostsMinAggregateOutputType = {
     id: string | null
     name: string | null
-    data: Date | null
-    content: string | null
     description: string | null
+    date: string | null
+    time: string | null
     importance: $Enums.ImportanceType | null
     userId: string | null
     createdAt: Date | null
@@ -2103,9 +2103,9 @@ export namespace Prisma {
   export type PostsMaxAggregateOutputType = {
     id: string | null
     name: string | null
-    data: Date | null
-    content: string | null
     description: string | null
+    date: string | null
+    time: string | null
     importance: $Enums.ImportanceType | null
     userId: string | null
     createdAt: Date | null
@@ -2115,9 +2115,9 @@ export namespace Prisma {
   export type PostsCountAggregateOutputType = {
     id: number
     name: number
-    data: number
-    content: number
     description: number
+    date: number
+    time: number
     importance: number
     userId: number
     createdAt: number
@@ -2129,9 +2129,9 @@ export namespace Prisma {
   export type PostsMinAggregateInputType = {
     id?: true
     name?: true
-    data?: true
-    content?: true
     description?: true
+    date?: true
+    time?: true
     importance?: true
     userId?: true
     createdAt?: true
@@ -2141,9 +2141,9 @@ export namespace Prisma {
   export type PostsMaxAggregateInputType = {
     id?: true
     name?: true
-    data?: true
-    content?: true
     description?: true
+    date?: true
+    time?: true
     importance?: true
     userId?: true
     createdAt?: true
@@ -2153,9 +2153,9 @@ export namespace Prisma {
   export type PostsCountAggregateInputType = {
     id?: true
     name?: true
-    data?: true
-    content?: true
     description?: true
+    date?: true
+    time?: true
     importance?: true
     userId?: true
     createdAt?: true
@@ -2238,9 +2238,9 @@ export namespace Prisma {
   export type PostsGroupByOutputType = {
     id: string
     name: string
-    data: Date
-    content: string
     description: string
+    date: string
+    time: string
     importance: $Enums.ImportanceType
     userId: string
     createdAt: Date
@@ -2267,9 +2267,9 @@ export namespace Prisma {
   export type PostsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    data?: boolean
-    content?: boolean
     description?: boolean
+    date?: boolean
+    time?: boolean
     importance?: boolean
     userId?: boolean
     createdAt?: boolean
@@ -2280,9 +2280,9 @@ export namespace Prisma {
   export type PostsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    data?: boolean
-    content?: boolean
     description?: boolean
+    date?: boolean
+    time?: boolean
     importance?: boolean
     userId?: boolean
     createdAt?: boolean
@@ -2293,9 +2293,9 @@ export namespace Prisma {
   export type PostsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    data?: boolean
-    content?: boolean
     description?: boolean
+    date?: boolean
+    time?: boolean
     importance?: boolean
     userId?: boolean
     createdAt?: boolean
@@ -2306,16 +2306,16 @@ export namespace Prisma {
   export type PostsSelectScalar = {
     id?: boolean
     name?: boolean
-    data?: boolean
-    content?: boolean
     description?: boolean
+    date?: boolean
+    time?: boolean
     importance?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type PostsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "data" | "content" | "description" | "importance" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["posts"]>
+  export type PostsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "date" | "time" | "importance" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["posts"]>
   export type PostsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UsersDefaultArgs<ExtArgs>
   }
@@ -2334,9 +2334,9 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
-      data: Date
-      content: string
       description: string
+      date: string
+      time: string
       importance: $Enums.ImportanceType
       userId: string
       createdAt: Date
@@ -2767,9 +2767,9 @@ export namespace Prisma {
   interface PostsFieldRefs {
     readonly id: FieldRef<"Posts", 'String'>
     readonly name: FieldRef<"Posts", 'String'>
-    readonly data: FieldRef<"Posts", 'DateTime'>
-    readonly content: FieldRef<"Posts", 'String'>
     readonly description: FieldRef<"Posts", 'String'>
+    readonly date: FieldRef<"Posts", 'String'>
+    readonly time: FieldRef<"Posts", 'String'>
     readonly importance: FieldRef<"Posts", 'ImportanceType'>
     readonly userId: FieldRef<"Posts", 'String'>
     readonly createdAt: FieldRef<"Posts", 'DateTime'>
@@ -3216,9 +3216,9 @@ export namespace Prisma {
   export const PostsScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    data: 'data',
-    content: 'content',
     description: 'description',
+    date: 'date',
+    time: 'time',
     importance: 'importance',
     userId: 'userId',
     createdAt: 'createdAt',
@@ -3369,9 +3369,9 @@ export namespace Prisma {
     NOT?: PostsWhereInput | PostsWhereInput[]
     id?: StringFilter<"Posts"> | string
     name?: StringFilter<"Posts"> | string
-    data?: DateTimeFilter<"Posts"> | Date | string
-    content?: StringFilter<"Posts"> | string
     description?: StringFilter<"Posts"> | string
+    date?: StringFilter<"Posts"> | string
+    time?: StringFilter<"Posts"> | string
     importance?: EnumImportanceTypeFilter<"Posts"> | $Enums.ImportanceType
     userId?: StringFilter<"Posts"> | string
     createdAt?: DateTimeFilter<"Posts"> | Date | string
@@ -3382,9 +3382,9 @@ export namespace Prisma {
   export type PostsOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    data?: SortOrder
-    content?: SortOrder
     description?: SortOrder
+    date?: SortOrder
+    time?: SortOrder
     importance?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -3398,9 +3398,9 @@ export namespace Prisma {
     OR?: PostsWhereInput[]
     NOT?: PostsWhereInput | PostsWhereInput[]
     name?: StringFilter<"Posts"> | string
-    data?: DateTimeFilter<"Posts"> | Date | string
-    content?: StringFilter<"Posts"> | string
     description?: StringFilter<"Posts"> | string
+    date?: StringFilter<"Posts"> | string
+    time?: StringFilter<"Posts"> | string
     importance?: EnumImportanceTypeFilter<"Posts"> | $Enums.ImportanceType
     userId?: StringFilter<"Posts"> | string
     createdAt?: DateTimeFilter<"Posts"> | Date | string
@@ -3411,9 +3411,9 @@ export namespace Prisma {
   export type PostsOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    data?: SortOrder
-    content?: SortOrder
     description?: SortOrder
+    date?: SortOrder
+    time?: SortOrder
     importance?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -3429,9 +3429,9 @@ export namespace Prisma {
     NOT?: PostsScalarWhereWithAggregatesInput | PostsScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Posts"> | string
     name?: StringWithAggregatesFilter<"Posts"> | string
-    data?: DateTimeWithAggregatesFilter<"Posts"> | Date | string
-    content?: StringWithAggregatesFilter<"Posts"> | string
     description?: StringWithAggregatesFilter<"Posts"> | string
+    date?: StringWithAggregatesFilter<"Posts"> | string
+    time?: StringWithAggregatesFilter<"Posts"> | string
     importance?: EnumImportanceTypeWithAggregatesFilter<"Posts"> | $Enums.ImportanceType
     userId?: StringWithAggregatesFilter<"Posts"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Posts"> | Date | string
@@ -3501,9 +3501,9 @@ export namespace Prisma {
   export type PostsCreateInput = {
     id?: string
     name: string
-    data: Date | string
-    content: string
     description: string
+    date: string
+    time: string
     importance?: $Enums.ImportanceType
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3513,9 +3513,9 @@ export namespace Prisma {
   export type PostsUncheckedCreateInput = {
     id?: string
     name: string
-    data: Date | string
-    content: string
     description: string
+    date: string
+    time: string
     importance?: $Enums.ImportanceType
     userId: string
     createdAt?: Date | string
@@ -3525,9 +3525,9 @@ export namespace Prisma {
   export type PostsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
-    content?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
     importance?: EnumImportanceTypeFieldUpdateOperationsInput | $Enums.ImportanceType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3537,9 +3537,9 @@ export namespace Prisma {
   export type PostsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
-    content?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
     importance?: EnumImportanceTypeFieldUpdateOperationsInput | $Enums.ImportanceType
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3549,9 +3549,9 @@ export namespace Prisma {
   export type PostsCreateManyInput = {
     id?: string
     name: string
-    data: Date | string
-    content: string
     description: string
+    date: string
+    time: string
     importance?: $Enums.ImportanceType
     userId: string
     createdAt?: Date | string
@@ -3561,9 +3561,9 @@ export namespace Prisma {
   export type PostsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
-    content?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
     importance?: EnumImportanceTypeFieldUpdateOperationsInput | $Enums.ImportanceType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3572,9 +3572,9 @@ export namespace Prisma {
   export type PostsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
-    content?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
     importance?: EnumImportanceTypeFieldUpdateOperationsInput | $Enums.ImportanceType
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3688,9 +3688,9 @@ export namespace Prisma {
   export type PostsCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    data?: SortOrder
-    content?: SortOrder
     description?: SortOrder
+    date?: SortOrder
+    time?: SortOrder
     importance?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -3700,9 +3700,9 @@ export namespace Prisma {
   export type PostsMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    data?: SortOrder
-    content?: SortOrder
     description?: SortOrder
+    date?: SortOrder
+    time?: SortOrder
     importance?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -3712,9 +3712,9 @@ export namespace Prisma {
   export type PostsMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    data?: SortOrder
-    content?: SortOrder
     description?: SortOrder
+    date?: SortOrder
+    time?: SortOrder
     importance?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -3886,9 +3886,9 @@ export namespace Prisma {
   export type PostsCreateWithoutUserInput = {
     id?: string
     name: string
-    data: Date | string
-    content: string
     description: string
+    date: string
+    time: string
     importance?: $Enums.ImportanceType
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3897,9 +3897,9 @@ export namespace Prisma {
   export type PostsUncheckedCreateWithoutUserInput = {
     id?: string
     name: string
-    data: Date | string
-    content: string
     description: string
+    date: string
+    time: string
     importance?: $Enums.ImportanceType
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3937,9 +3937,9 @@ export namespace Prisma {
     NOT?: PostsScalarWhereInput | PostsScalarWhereInput[]
     id?: StringFilter<"Posts"> | string
     name?: StringFilter<"Posts"> | string
-    data?: DateTimeFilter<"Posts"> | Date | string
-    content?: StringFilter<"Posts"> | string
     description?: StringFilter<"Posts"> | string
+    date?: StringFilter<"Posts"> | string
+    time?: StringFilter<"Posts"> | string
     importance?: EnumImportanceTypeFilter<"Posts"> | $Enums.ImportanceType
     userId?: StringFilter<"Posts"> | string
     createdAt?: DateTimeFilter<"Posts"> | Date | string
@@ -3997,9 +3997,9 @@ export namespace Prisma {
   export type PostsCreateManyUserInput = {
     id?: string
     name: string
-    data: Date | string
-    content: string
     description: string
+    date: string
+    time: string
     importance?: $Enums.ImportanceType
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4008,9 +4008,9 @@ export namespace Prisma {
   export type PostsUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
-    content?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
     importance?: EnumImportanceTypeFieldUpdateOperationsInput | $Enums.ImportanceType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4019,9 +4019,9 @@ export namespace Prisma {
   export type PostsUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
-    content?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
     importance?: EnumImportanceTypeFieldUpdateOperationsInput | $Enums.ImportanceType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4030,9 +4030,9 @@ export namespace Prisma {
   export type PostsUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
-    content?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
     importance?: EnumImportanceTypeFieldUpdateOperationsInput | $Enums.ImportanceType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

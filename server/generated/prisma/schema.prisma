@@ -32,9 +32,9 @@ model Posts {
   id String @id @default(uuid())
 
   name        String
-  data        DateTime
-  content     String
   description String
+  date        String
+  time        String
   importance  ImportanceType @default(NORMAL)
 
   userId String @map("user_id")
