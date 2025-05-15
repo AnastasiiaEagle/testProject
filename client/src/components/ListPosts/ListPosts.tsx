@@ -8,11 +8,13 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 import { CardInt } from "@/types/CardInt";
 import Filter from "../Filter/Filter";
+import FilterInput from "../FilterInput/FilterInput";
 
 export default function ListPosts() {
     const [posts, setPosts] = useState<CardInt[]>([]);
+    const [allPosts, setAllPosts] = useState<CardInt[]>([]);
+
     const [loading, setLoading] = useState(true);
-    const [popupState, setPopupState] = useState(false)
     const router = useRouter();
 
     function isAccessTokenValid(token: string): boolean {
@@ -66,6 +68,7 @@ export default function ListPosts() {
         
         setLoading(false)
         setPosts(res.data)
+        setAllPosts(res.data)
 
         } catch (error) {
         console.log(error)
@@ -73,27 +76,25 @@ export default function ListPosts() {
     }
 
     const filterTasks = async (importance: string) =>{
+        console.log(importance)
         if(importance!==""){
-            try {
-            const res = await axios.get('/posts/user', 
-                {
-                    withCredentials: true
-                });
-            
-            setLoading(false)
-            setPosts(res.data)
-
-            if (res.status === 200) {
-            setPosts((post) => post.filter((msg) => msg.importance === importance));
-            } else {
-            console.error('Не вдалося отримати повідомлення');
-            }
-        setLoading(false);
-        } catch (error) {
-            console.log(error)
-        }
+        const filtered = allPosts.filter((msg) => msg.importance === importance);
+        setPosts(filtered);
         } else {
-        getPosts()
+            setPosts(allPosts)
+        }
+        
+    }
+
+    const filterInput = async (text: string) =>{
+        if(text!==""){
+             const filtered = allPosts.filter(msg =>
+                msg.name.toLowerCase().includes(text.toLowerCase()) ||
+                msg.description.toLowerCase().includes(text.toLowerCase())
+            )
+            setPosts(filtered);
+        } else {
+            setPosts(allPosts)
         }
     }
 
@@ -105,6 +106,7 @@ export default function ListPosts() {
     return(
         <>
             <Filter onFilter={filterTasks}/>
+            <FilterInput onFilterInput={filterInput}/>
             <div className="relative p-8 bg-gray-100 min-h-screen">
                 <div className="w-full flex flex-col items-center px-4 pt-5">
                     <div className="w-full max-w-3xl">

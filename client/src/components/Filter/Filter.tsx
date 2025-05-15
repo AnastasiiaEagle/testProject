@@ -1,18 +1,18 @@
 import { useState } from "react";
 
 type FilterProps = {
-    onFilter: (emotion: string) => void;
+    onFilter: (importance: string) => void;
 }
 
 export default function Filter({onFilter}:FilterProps) {
-    const [emotion, setEmotion] = useState('');
+    const [importance, setImportance] = useState('');
 
     return (
         <div className="w-full bg-white shadow p-4 flex items-center justify-center">
             <div className="flex gap-4 w-full max-w-4xl">
                 <select
-                value={emotion}
-                onChange={(e) => setEmotion(e.target.value)}
+                value={importance}
+                onChange={(e) => setImportance(e.target.value)}
                 className="border p-2 rounded w-full"
                 >
                     <option value="">Оберіть важливість</option>
@@ -22,7 +22,7 @@ export default function Filter({onFilter}:FilterProps) {
                 </select>
 
                 <button
-                onClick={() => onFilter(emotion)}
+                onClick={() => onFilter(importance)}
                 className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
                 >
                 Пошук
